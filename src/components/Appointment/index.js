@@ -21,6 +21,16 @@ export default function Appointment(props) {
   const onCancel = () => back();
   const onDelete = () => transition(CONFIRM);
 
+  //save() is passed to Form as props and will be the event handler for onClick on the Save/Confirm button
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer,
+    };
+    //id in bookInterview() refers to appointment id
+    props.bookInterview(props.id, interview);
+  }
+
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -32,7 +42,13 @@ export default function Appointment(props) {
           onDelete={onDelete}
         />
       )}
-      {mode === CREATE && <Form interviewers={[]} onCancel={onCancel} />}
+      {mode === CREATE && (
+        <Form
+          interviewers={props.interviewers}
+          onSave={save}
+          onCancel={onCancel}
+        />
+      )}
     </article>
   );
 }
