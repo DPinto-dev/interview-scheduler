@@ -31,3 +31,20 @@ export function getAppointmentsForDay(state, day) {
     }
   }
 }
+
+export function getInterview(state, interview) {
+  if (interview) {
+    const student = interview.student;
+    const interviewerId = interview.interviewer;
+
+    return {
+      student: student,
+      interviewer: {
+        id: interviewerId,
+        name: state.interviewers[interviewerId].name,
+        avatar: state.interviewers[interviewerId].avatar,
+      },
+    };
+  }
+  return null;
+}
