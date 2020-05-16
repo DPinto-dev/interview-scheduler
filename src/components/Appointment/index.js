@@ -17,17 +17,22 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  const onAdd = () => transition(CREATE);
+  const onCancel = () => back();
+  const onDelete = () => transition(CONFIRM);
+
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {mode === EMPTY && <Empty onAdd={transition(CREATE)} />}
+      {mode === EMPTY && <Empty onAdd={onAdd} />}
       {mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={onDelete}
         />
       )}
-      {mode === CREATE && <Form interviewers={[]} onCancel={back} />}
+      {mode === CREATE && <Form interviewers={[]} onCancel={onCancel} />}
     </article>
   );
 }
