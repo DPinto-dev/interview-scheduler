@@ -6,6 +6,7 @@ import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
 import useVisualMode from "../../hooks/useVisualMode";
+import Status from "./Status";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -37,6 +38,7 @@ export default function Appointment(props) {
     <article className="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={onAdd} />}
+      {mode === SAVING && <Status />}
       {mode === SHOW && (
         <Show
           student={props.interview.student}
