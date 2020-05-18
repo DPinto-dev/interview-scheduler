@@ -11,6 +11,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const CONFIRM = "CONFIRM";
+const SAVING = "SAVING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -27,8 +28,9 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
+    transition(SAVING);
     //id in bookInterview() refers to appointment id
-    props.bookInterview(props.id, interview);
+    props.bookInterview(props.id, interview).then(() => transition(SHOW));
   }
 
   return (
