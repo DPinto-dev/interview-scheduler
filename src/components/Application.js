@@ -68,6 +68,7 @@ export default function Application(props) {
 
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
+    console.log("Application -> appointment.interview", appointment.interview);
     return (
       <Appointment
         {...appointment}
@@ -78,6 +79,13 @@ export default function Application(props) {
         interviewers={interviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
+        //Aren't we passing these props already? Maybe this is unnecessary
+        currentStudent={
+          appointment.interview ? appointment.interview.student : ""
+        }
+        currentInterviewer={
+          appointment.interview ? appointment.interview.interviewer : ""
+        }
       />
     );
   });

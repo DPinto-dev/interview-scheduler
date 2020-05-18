@@ -16,6 +16,7 @@ const CREATE = "CREATE";
 const CONFIRM = "CONFIRM";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
+const EDIT = "EDIT";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -26,8 +27,8 @@ export default function Appointment(props) {
   const onCancel = () => back();
   const onDelete = () => transition(CONFIRM);
 
-  //save() is passed to Form as props and will be the event handler for onClick on the Save/Confirm button
-  function save(name, interviewer) {
+  //saveAppointment() (originally save()) is passed to Form as props and will be the event handler for onClick on the Save/Confirm button
+  function saveAppointment(name, interviewer) {
     const interview = {
       student: name,
       interviewer,
@@ -52,12 +53,22 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
         <Form
           interviewers={props.interviewers}
-          onSave={save}
+          onSave={saveAppointment}
+          onCancel={onCancel}
+        />
+      )}
+      {mode === EDIT && (
+        <Form
+          name={props.currentStudent}
+          interviewer={props.currentInterviewer}
+          interviewers={props.interviewers}
+          onSave={saveAppointment}
           onCancel={onCancel}
         />
       )}
