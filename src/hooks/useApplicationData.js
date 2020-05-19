@@ -26,6 +26,27 @@ export default function useApplicationData() {
     });
   }, []);
 
+  //To solve the UPDATE SPOTS problem we'll probably need to spread the days, change the spots and make a put req to the API
+  function updateSpots(id, operation) {
+    if (operation === "add") {
+      const spot = state.days.spots;
+      const addSpot = {
+        ...state.days[id],
+        spots: spot + 1,
+      };
+      return axios.put(`/api/days/${id}`, addSpot);
+    }
+
+    if (operation === "remove") {
+      const spot = state.days.spots;
+      const removeSpot = {
+        ...state.days[id],
+        spots: spot - 1,
+      };
+      return axios.put(`/api/days/${id}`, removeSpot);
+    }
+  }
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -35,6 +56,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    updateSpots(id, "add").then(() => setState({ ...state }));
     return axios
       .put(`/api/appointments/${id}`, appointment)
       .then(() => setState({ ...state, appointments }));
