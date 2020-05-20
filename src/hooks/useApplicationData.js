@@ -26,25 +26,25 @@ export default function useApplicationData() {
     });
   }, []);
 
-  //To solve the UPDATE SPOTS problem we'll probably need to spread the days, change the spots and make a put req to the API
-  function updateSpots(id, operation) {
-    if (operation === "add") {
-      const spot = state.days.spots;
-      const addSpot = {
-        ...state.days[id],
-        spots: spot + 1,
-      };
-      return axios.put(`/api/days/${id}`, addSpot);
+  function updateSpots(dayName, operation) {
+    const modifiedDays = [...state.days];
+
+    //maybe we could try to use forEach to modify array with new spots number directly???
+    let currentSpots = modifiedDays.filter((day) => day.name === dayName)[0]
+      .spots;
+    let newSpots;
+
+    operation === "bookAppt"
+      ? (newSpots = currentSpots - 1)
+      : (newSpots = currentSpots + 1) /* cancelAppt */;
+
+    for (const day of modifiedDays) {
+      if (day.name === dayName) {
+        day.spots = newSpots;
+      }
     }
 
-    if (operation === "remove") {
-      const spot = state.days.spots;
-      const removeSpot = {
-        ...state.days[id],
-        spots: spot - 1,
-      };
-      return axios.put(`/api/days/${id}`, removeSpot);
-    }
+    return modifiedDays;
   }
 
   function bookInterview(id, interview) {
@@ -56,10 +56,10 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    updateSpots(id, "add").then(() => setState({ ...state }));
+    const modifiedDays = updateSpots(state.day, "bookAppt");
     return axios
       .put(`/api/appointments/${id}`, appointment)
-      .then(() => setState({ ...state, appointments }));
+      .then(() => setState({ ...state, appointments, days: modifiedDays }));
   }
 
   function cancelInterview(id) {
@@ -71,9 +71,10 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const modifiedDays = updateSpots(state.day, "cancelAppt");
     return axios
       .delete(`/api/appointments/${id}`)
-      .then(() => setState({ ...state, appointments }));
+      .then(() => setState({ ...state, appointments, days: modifiedDays }));
   }
 
   return { state, setDay, bookInterview, cancelInterview };
