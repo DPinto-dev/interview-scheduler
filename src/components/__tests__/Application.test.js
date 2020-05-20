@@ -46,10 +46,16 @@ describe("Application", () => {
 
     /* user clicks the save button */
     fireEvent.click(getByText(appointment, "Save"));
-    expect(getByText(appointment, "Saving...")).toBeInTheDocument();
-    // debug();
-    // console.log(prettyDOM(appointment));
 
+    expect(getByText(appointment, "Saving...")).toBeInTheDocument();
+
+    /* save operation completes and displays student's name */
     await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+
+    /* selects Monday and asserts the reduction in spots */
+    const day = getAllByTestId(container, "day").find((day) =>
+      queryByText(day, "Monday")
+    );
+    expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
   });
 });
