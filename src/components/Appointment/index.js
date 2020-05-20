@@ -30,7 +30,7 @@ export default function Appointment(props) {
   const onDelete = () => transition(CONFIRM);
 
   //saveAppointment() (originally save()) is passed to Form as props and will be the event handler for onClick on the Save/Confirm button
-  function saveAppointment(name, interviewer) {
+  function saveAppointment(name, interviewer, operation) {
     const interview = {
       student: name,
       interviewer,
@@ -38,7 +38,7 @@ export default function Appointment(props) {
     transition(SAVING);
     //id in bookInterview() refers to appointment id
     props
-      .bookInterview(props.id, interview)
+      .bookInterview(props.id, interview, operation)
       .then(() => transition(SHOW))
       .catch((error) => transition(ERROR_SAVE, true));
   }
@@ -68,6 +68,7 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onSave={saveAppointment}
           onCancel={onCancel}
+          operation="CREATE"
         />
       )}
       {mode === EDIT && (
@@ -77,6 +78,7 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onSave={saveAppointment}
           onCancel={onCancel}
+          operation="EDIT"
         />
       )}
       {mode === SAVING && <Status message="Saving..." />}
