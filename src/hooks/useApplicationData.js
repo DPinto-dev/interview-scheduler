@@ -29,20 +29,13 @@ export default function useApplicationData() {
   function updateSpots(dayName, operation) {
     const modifiedDays = [...state.days];
 
-    //maybe we could try to use forEach to modify array with new spots number directly???
-    let currentSpots = modifiedDays.filter((day) => day.name === dayName)[0]
-      .spots;
-    let newSpots;
-
-    operation === "bookAppt"
-      ? (newSpots = currentSpots - 1)
-      : (newSpots = currentSpots + 1) /* cancelAppt */;
-
-    for (const day of modifiedDays) {
+    modifiedDays.forEach((day) => {
       if (day.name === dayName) {
-        day.spots = newSpots;
+        operation === "bookAppt"
+          ? (day.spots = day.spots - 1)
+          : (day.spots = day.spots + 1);
       }
-    }
+    });
 
     return modifiedDays;
   }
