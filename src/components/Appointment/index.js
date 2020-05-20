@@ -55,7 +55,6 @@ export default function Appointment(props) {
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={onAdd} />}
-      {mode === SAVING && <Status message="Saving..." />}
       {mode === SHOW && (
         <Show
           student={props.interview.student}
@@ -80,6 +79,7 @@ export default function Appointment(props) {
           onCancel={onCancel}
         />
       )}
+      {mode === SAVING && <Status message="Saving..." />}
       {mode === DELETING && <Status message="Deleting..." />}
       {mode === CONFIRM && (
         <Confirm
