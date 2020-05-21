@@ -7,6 +7,7 @@ import {
   fireEvent,
   getByText,
   queryByText,
+  queryByAltText,
   prettyDOM,
   getAllByTestId,
   getByAltText,
@@ -90,6 +91,7 @@ describe("Application", () => {
 
     // 8. Wait until the "Add" button is displayed for that appointment
     await waitForElement(() => getByAltText(appointment, "Add"));
+    //! 1 spot
 
     // 9. Check that the spots for the DayListItem with text "Monday" have increased by 1.
     const day = getAllByTestId(container, "day").find((day) =>
