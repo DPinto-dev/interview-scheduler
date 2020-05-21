@@ -17,7 +17,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
-
+/src/hooks/usApplicationData-SpotsReducer.js
 .vscode/
 
 npm-debug.log*

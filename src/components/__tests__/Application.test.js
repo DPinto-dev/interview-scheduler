@@ -19,7 +19,10 @@ import Application from "components/Application";
 
 import axios from "axios";
 
-afterEach(cleanup);
+afterEach(() => {
+  console.log("cleanup");
+  cleanup();
+});
 
 describe("Application", () => {
   it("defaults to Monday and changes the schedule when a new day is selected", async () => {
@@ -91,13 +94,12 @@ describe("Application", () => {
 
     // 8. Wait until the "Add" button is displayed for that appointment
     await waitForElement(() => getByAltText(appointment, "Add"));
-    //! 1 spot
 
     // 9. Check that the spots for the DayListItem with text "Monday" have increased by 1.
     const day = getAllByTestId(container, "day").find((day) =>
       queryByText(day, "Monday")
     );
-    expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
+    expect(getByText(day, /2 spots remaining/i)).toBeInTheDocument();
   });
 
   it("loads data, edits an interview and does not affect the spots remaining", async () => {
