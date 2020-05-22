@@ -20,8 +20,8 @@ import Application from "components/Application";
 import axios from "axios";
 
 afterEach(() => {
-  console.log("cleanup");
   cleanup();
+  jest.clearAllMocks();
 });
 
 describe("Application", () => {

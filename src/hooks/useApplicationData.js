@@ -39,6 +39,14 @@ export default function useApplicationData() {
   const setDay = (day) => dispatch({ type: SET_DAY, day });
 
   useEffect(() => {
+    const webSocket = new WebSocket(
+      process.env.REACT_APP_WEBSOCKET_URL || "ws://localhost:8001"
+    );
+    webSocket.onopen = () => webSocket.send("Pinnnnnnnng");
+    webSocket.onmessage = function (event) {
+      console.log("Message Received: ", event.data);
+    };
+
     Promise.all([
       axios.get(`/api/days`),
       axios.get(`/api/appointments`),
