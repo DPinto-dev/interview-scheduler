@@ -62,7 +62,7 @@ describe("Form", () => {
       target: { value: "Lydia Miller-Jones" },
     });
 
-    //Had to provision for a click on one of the interviewers to pass an additional validation
+    //Had to account for a click on one of the interviewers to pass an additional validation
     fireEvent.click(getByAltText("Sylvia Palmer"));
 
     fireEvent.click(getByText("Save"));

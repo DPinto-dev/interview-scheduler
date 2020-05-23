@@ -21,7 +21,7 @@ import axios from "axios";
 
 afterEach(() => {
   cleanup();
-  jest.clearAllMocks();
+  // jest.clearAllMocks();
 });
 
 describe("Application", () => {
@@ -99,7 +99,7 @@ describe("Application", () => {
     const day = getAllByTestId(container, "day").find((day) =>
       queryByText(day, "Monday")
     );
-    expect(getByText(day, /2 spots remaining/i)).toBeInTheDocument();
+    expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument();
   });
 
   it("loads data, edits an interview and does not affect the spots remaining", async () => {
