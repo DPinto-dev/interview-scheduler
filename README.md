@@ -33,6 +33,8 @@ For a full list of features, please check the list of [Functional and Behavioral
 ![Interview Scheduler Confirm Deletion](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-confirm.png)
 ![Interview Scheduler Deleting an appointment](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-deleting.png)
 
+---
+
 ## Technical Stack
 
 - [React](https://vuejs.org/) - including [Webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/)
@@ -87,6 +89,8 @@ npm test
 ```sh
 npm run cypress
 ```
+
+---
 
 ## Contributing
 
