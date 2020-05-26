@@ -6,8 +6,8 @@
 
 - [Functionality](#Functionality)
   - [Full List of Features](#Full-List-of-Features)
-  - [Screenshots](#Screenshots)
-  - [Technical Stack](#Technical-Stack)
+- [Screenshots](#Screenshots)
+- [Technical Stack](#Technical-Stack)
 - [Setup](#Setup)
 - [Running the Tests](#Running-the-Tests)
 - [Contributing](#contributing)
@@ -67,8 +67,6 @@ For a full list of features, please check the list of [Functional and Behavioral
 ```sh
 npm start
 ```
-
----
 
 ## Running the Tests
 
