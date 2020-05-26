@@ -5,6 +5,7 @@
 ## Table of contents
 
 - [Functionality](#Functionality)
+  - [Full List of Features](#Full-List-of-Features)
   - [Screenshots](#Screenshots)
   - [Technical Stack](#Technical-Stack)
 - [Setup](#Setup)
@@ -21,14 +22,16 @@
 
 The app's main functionality is to allow for a student to book and manage an interview with a mentor. The user experience is very smooth with no page refreshes, thanks to the SPA characteristic and the usage of simple indicators to inform the user when asynchronous operations take place. The state client-side is synchronized and persisted with the server via an API that communicates with the Express server and a PostgreSQL database.
 
-For a full list of features, please check the list of [Functional and Behavioral Features]() of this application.
+#### Full List of Features
+
+For a full list of features, please check the list of [Functional and Behavioral Features](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/functional-behavioral-features.md) of this application.
 
 ## Screenshots
 
-[!Interview Scheduler Overview]()
-[!Interview Scheduler Adding new appointment]()
-[!Interview Scheduler Deleting an appointment]()
-[!Interview Scheduler Confirm Deletion]()
+[!Interview Scheduler Overview](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-overview.png)
+[!Interview Scheduler Adding new appointment](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-save.png)
+[!Interview Scheduler Confirm Deletion](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-confirm.png)
+[!Interview Scheduler Deleting an appointment](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-deleting.png)
 
 ## Technical Stack
 
