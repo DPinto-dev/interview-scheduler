@@ -28,10 +28,10 @@ For a full list of features, please check the list of [Functional and Behavioral
 
 ## Screenshots
 
-[!Interview Scheduler Overview](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-overview.png)
-[!Interview Scheduler Adding new appointment](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-save.png)
-[!Interview Scheduler Confirm Deletion](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-confirm.png)
-[!Interview Scheduler Deleting an appointment](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-deleting.png)
+![Interview Scheduler Overview](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-overview.png)
+![Interview Scheduler Adding new appointment](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-save.png)
+![Interview Scheduler Confirm Deletion](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-confirm.png)
+![Interview Scheduler Deleting an appointment](https://github.com/DPintoLL/scheduler-v2/blob/master/docs/interview-scheduler-deleting.png)
 
 ## Technical Stack
 
