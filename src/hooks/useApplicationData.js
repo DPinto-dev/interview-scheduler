@@ -11,54 +11,46 @@ export default function useApplicationData() {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {},
+    interviewers: {}
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function reducer(state, action) {
     switch (action.type) {
-      case SET_DAY:
-        return { ...state, day: action.day };
+      // case SET_DAY:
+      //   return { ...state, day: action.day };
       case SET_APPLICATION_DATA:
         return {
           ...state,
-          ...action.payload,
+          ...action.payload
         };
       case SET_INTERVIEW:
         return {
           ...state,
-          ...action.payload,
+          ...action.payload
         };
       default:
-        throw new Error(
-          `Tried to reduce with unsupported action type: ${action.type}`
-        );
+        throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
     }
   }
 
-  const setDay = (day) => dispatch({ type: SET_DAY, day });
+  const setDay = day => dispatch({ type: SET_DAY, day });
 
   useEffect(() => {
-    const webSocket = new WebSocket(
-      process.env.REACT_APP_WEBSOCKET_URL || "ws://localhost:8001"
-    );
+    const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL || "ws://localhost:8001");
     webSocket.onopen = () => webSocket.send("Pinnnnnnnng");
     webSocket.onmessage = function (event) {
       console.log("Message Received: ", event.data);
     };
 
-    Promise.all([
-      axios.get(`/api/days`),
-      axios.get(`/api/appointments`),
-      axios.get(`/api/interviewers`),
-    ]).then((all) => {
+    Promise.all([axios.get(`/api/days`), axios.get(`/api/appointments`), axios.get(`/api/interviewers`)]).then(all => {
       dispatch({
         type: SET_APPLICATION_DATA,
         payload: {
           days: all[0].data,
           appointments: all[1].data,
-          interviewers: all[2].data,
-        },
+          interviewers: all[2].data
+        }
       });
     });
   }, []);
@@ -67,7 +59,7 @@ export default function useApplicationData() {
     const modifiedDays = [...state.days];
 
     // Implicitly, if operation === "EDIT" spots are not updated
-    modifiedDays.forEach((day) => {
+    modifiedDays.forEach(day => {
       if (day.name === dayName) {
         if (operation === "CREATE") {
           day.spots = day.spots - 1;
@@ -82,17 +74,17 @@ export default function useApplicationData() {
   function bookInterview(id, interview, operation) {
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview },
+      interview: { ...interview }
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointment,
+      [id]: appointment
     };
     const modifiedDays = updateSpots(state.day, operation);
     return axios.put(`/api/appointments/${id}`, appointment).then(() => {
       dispatch({
         type: SET_INTERVIEW,
-        payload: { appointments, days: modifiedDays },
+        payload: { appointments, days: modifiedDays }
       });
     });
   }
@@ -100,17 +92,17 @@ export default function useApplicationData() {
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
-      interview: null,
+      interview: null
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointment,
+      [id]: appointment
     };
     const modifiedDays = updateSpots(state.day, "CANCEL");
     return axios.delete(`/api/appointments/${id}`).then(() => {
       dispatch({
         type: SET_INTERVIEW,
-        payload: { appointments, days: modifiedDays },
+        payload: { appointments, days: modifiedDays }
       });
     });
   }
