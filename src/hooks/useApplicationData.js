@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
+import { cleanup } from "@testing-library/react";
 
 export default function useApplicationData() {
   // OUR ACTION TYPES:
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
+  // const CANCEL_INTERVIEW = "CANCEL_INTERVIEW";
 
   const initialState = {
     day: "Monday",
@@ -13,7 +15,6 @@ export default function useApplicationData() {
     appointments: {},
     interviewers: {}
   };
-  const [state, dispatch] = useReducer(reducer, initialState);
 
   function reducer(state, action) {
     switch (action.type) {
@@ -25,6 +26,7 @@ export default function useApplicationData() {
           ...action.payload
         };
       case SET_INTERVIEW:
+        // bookInterview(id, interview, "CREATE");
         return {
           ...state,
           ...action.payload
@@ -34,15 +36,11 @@ export default function useApplicationData() {
     }
   }
 
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const setDay = day => dispatch({ type: SET_DAY, day });
 
   useEffect(() => {
-    const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL || "ws://localhost:8001");
-    webSocket.onopen = () => webSocket.send("Pinnnnnnnng");
-    webSocket.onmessage = function (event) {
-      console.log("Message Received: ", event.data);
-    };
-
     Promise.all([axios.get(`/api/days`), axios.get(`/api/appointments`), axios.get(`/api/interviewers`)]).then(all => {
       dispatch({
         type: SET_APPLICATION_DATA,
@@ -54,6 +52,29 @@ export default function useApplicationData() {
       });
     });
   }, []);
+
+  useEffect(() => {
+    const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL || "ws://localhost:8001");
+    webSocket.onopen = () => webSocket.send("ping");
+
+    webSocket.onmessage = function (event) {
+      console.log("Message Received: ", event.data);
+      const { type, id, interview } = JSON.parse(event.data);
+
+      if (type === "SET_INTERVIEW") {
+        // bookInterview(id, interview);
+        console.log("Asking to set");
+        dispatch({ type: SET_INTERVIEW, payload: { id, interview } });
+      }
+      // else {
+      //   dispatch({ type: CANCEL_INTERVIEW, payload: { id, interview } });
+      // }
+    };
+
+    // return function cleanup() {
+    //   webSocket.close();
+    // };
+  });
 
   function updateSpots(dayName, operation) {
     const modifiedDays = [...state.days];
