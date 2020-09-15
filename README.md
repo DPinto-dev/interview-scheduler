@@ -37,22 +37,28 @@ For a full list of features, please check the list of [Functional and Behavioral
 
 ## Technical Stack
 
-- [React](https://vuejs.org/) - including [Webpack](https://webpack.js.org/) and [Babel](https://babeljs.io/)
+- [React](https://reactjs.org/)
 - [Storybook](https://storybook.js.org/)
 - [Sass](https://sass-lang.com/)
 - [axios](https://github.com/axios/axios)
+- [WebSockets](https://www.npmjs.com/package/ws)
 
-#### Tested With
+#### Tested and CI done With
 
 - [Jest](https://www.jestjs.io)
 - [Testing-Library](https://testing-library.com/)
 - [Cypress](https://www.cypress.io)
+- [CircleCI](https://circleci.com/)
 
-#### API Stack
+#### Backend/API Stack
 
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
+
+#### Deployed to
+- [Netlify - Frontend](https://bit.ly/interview-scheduler)
+- [Heroku - Backend]
 
 ---
 
@@ -102,16 +108,5 @@ _If you would like to contribute in any way with this project, or if you find an
 
 ## Planned Features
 
-#### In the works
-
-- Web sockets integration
-
 #### In a near future
-
-- Deployment to Heroku
-- Adding CircleCI
 - 100% test coverage
-
-## Acknowledgements
-
-- This project was created as part of the Lighthouse Labs Web Development Bootcamp, with a few additional features.
