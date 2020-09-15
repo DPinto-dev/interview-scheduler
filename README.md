@@ -58,7 +58,7 @@ For a full list of features, please check the list of [Functional and Behavioral
 
 #### Deployed to
 - [Netlify - Frontend](https://bit.ly/interview-scheduler)
-- [Heroku - Backend]
+- Heroku - Backend
 
 ---
 
