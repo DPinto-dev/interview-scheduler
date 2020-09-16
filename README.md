@@ -107,6 +107,4 @@ _If you would like to contribute in any way with this project, or if you find an
 5. Create a new PR
 
 ## Planned Features
-
-#### In a near future
-- 100% test coverage
+- No additional planned features currently.
